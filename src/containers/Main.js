@@ -82,7 +82,6 @@ export default class Main extends Component {
     questionNumber: 1,
     question: "",
     options: [],
-    // userAnswer: "",
     userAnswersCount: {},
     result: "",
   };
@@ -95,7 +94,6 @@ export default class Main extends Component {
   }
 
   handleSelectedAnswer = (answer) => {
-    console.log(this.state);
     this.setAnswer(answer);
     if (this.state.questionNumber < questionData.length) {
       this.getNextQuestion();
@@ -135,7 +133,6 @@ export default class Main extends Component {
     const result = userAnswersCountKeys.filter(
       (key) => userAnswersCount[key] === maxAnswerCount
     );
-    // console.log(userAnswersCount);
     return result;
   };
 
@@ -150,11 +147,8 @@ export default class Main extends Component {
   showQuestions() {
     return (
       <Question
-        // answer={this.state.userAnswer}
         options={this.state.options}
-        // questionNumber={this.state.questionNumber}
         question={this.state.question}
-        // totalQuestions={questionData.length}
         onSelect={this.handleSelectedAnswer}
       />
     );
