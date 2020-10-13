@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Paper } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 import Question from "../components/Question";
 import Result from "../components/Result";
+import Products from "../components/Products";
 
 const questionData = [
   {
@@ -76,6 +77,54 @@ const questionData = [
   },
 ];
 
+const productsData = [
+  {
+    type: "Dogs",
+    name: "Dog Product 1",
+    description: "lorem ipsum dolor amet",
+  },
+  {
+    type: "Dogs",
+    name: "Dog Product 2",
+    description: "lorem ipsum dolor amet",
+  },
+  {
+    type: "Dogs",
+    name: "Dog Product 3",
+    description: "lorem ipsum dolor amet",
+  },
+  {
+    type: "Cats",
+    name: "Cat Product 1",
+    description: "lorem ipsum dolor amet",
+  },
+  {
+    type: "Cats",
+    name: "Cat Product 2",
+    description: "lorem ipsum dolor amet",
+  },
+  {
+    type: "Cats",
+    name: "Cat Product 3",
+    description: "lorem ipsum dolor amet",
+  },
+  {
+    type: "Bird Pets",
+    name: "Bird Product 1",
+    description: "lorem ipsum dolor amet",
+  },
+  {
+    type: "Bird Pets",
+    name: "Bird Product 2",
+    description: "lorem ipsum dolor amet",
+  },
+  {
+    type: "Bird Pets",
+    name: "Bird Product 3",
+    description: "lorem ipsum dolor amet",
+  },
+];
+
 export default class Main extends Component {
   state = {
     count: 0,
@@ -140,7 +189,7 @@ export default class Main extends Component {
     if (result.length === 1) {
       this.setState({ result: result[0] });
     } else {
-      this.setState({ result: "Undetermined" });
+      this.setState({ result: "None, Sorry!" });
     }
   }
 
@@ -158,19 +207,25 @@ export default class Main extends Component {
     return <Result result={this.state.result} />;
   }
 
+  showProducts() {
+    const products = productsData.filter(
+      (product) => product.type === this.state.result
+    );
+    return products.map((product, i) => {
+      return <Products key={i} details={product} />;
+    });
+  }
+
   render() {
     return (
-      <Paper
-        style={{
-          borderRadius: 0,
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        {this.state.result ? this.showResult() : this.showQuestions()}
-      </Paper>
+      <Grid container direction="column" spacing={2}>
+        <Grid item>
+          {this.state.result ? this.showResult() : this.showQuestions()}
+        </Grid>
+        <Grid item container direction="row" spacing={1} justify="center">
+          {this.showProducts()}
+        </Grid>
+      </Grid>
     );
   }
 }

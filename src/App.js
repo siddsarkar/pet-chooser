@@ -6,6 +6,7 @@ import {
   Toolbar,
   IconButton,
   Typography,
+  Container,
 } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 import { Pets } from "@material-ui/icons";
@@ -14,7 +15,7 @@ import Main from "./containers/Main";
 
 const theme = createMuiTheme({
   palette: {
-    type: "dark",
+    type: "light",
     primary: {
       light: "#757ce8",
       main: "#3f50b5",
@@ -36,7 +37,7 @@ const theme = createMuiTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <AppBar color="default" position="fixed">
+      <AppBar color="default" position="sticky">
         <Toolbar style={{ alignSelf: "center" }} variant="dense">
           <IconButton color="inherit" className="App-logo">
             <Pets />
@@ -44,7 +45,9 @@ function App() {
           <Typography>Pet-Chooser</Typography>
         </Toolbar>
       </AppBar>
-      <Main />
+      <Container style={{ marginTop: 20 }}>
+        <Main />
+      </Container>
     </ThemeProvider>
   );
 }
